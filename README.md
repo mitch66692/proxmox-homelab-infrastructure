@@ -34,9 +34,13 @@ Initially, duplicate files between download directories and media libraries caus
 A dedicated node acts as the Docker engine hosting an automated stack. Services communicate via internal Docker networks.
 * Arr-Stack: Automated fetching and categorization.
 * Custom Bash Automation: Scheduled cron jobs handle post-processing, utilizing lightweight CLI tools to merge or split media files automatically without heavy UI applications.
+ **[View docker-compose docs](./docker-compose.yml)**
 
-### 3. Automated Data Fetching (SpotDL)
-A dedicated LXC node runs a scheduled Cron job at 03:00 AM. It executes a custom script that scrapes playlists, fetches high-quality audio streams, embeds metadata, and deduplicates existing tracks. SpotDL isn't the proper name since it was a service used for directly download from spotify playlist that got blocked by spotify itself. So this LXC got created with that idea in mind. 
+### 3. Automated Audio Fetching (Python Integration)
+A dedicated LXC node runs a scheduled task to synchronize external playlists. Instead of relying on pre-packaged tools, I developed a custom Python application to manage the entire pipeline.
+ **[View Python Audio Automation Script](./scripts/spotify_sync.py)**
+
+* **Features:** It uses a custom scraper to fetch playlist data, orchestrates `yt-dlp` via subprocesses for audio extraction, queries the iTunes API for high-resolution cover art, and utilizes the `mutagen` library to inject ID3 tags directly into the MP3 files. It includes a custom deduplication algorithm to optimize I/O and network bandwidth.
 
 ### 4. AI Video Surveillance (Frigate)
 Deployed Frigate NVR for local AI object detection.
