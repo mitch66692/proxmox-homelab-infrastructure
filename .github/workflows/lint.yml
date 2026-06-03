@@ -1,0 +1,45 @@
+# .github/workflows/lint.yml
+#
+# Questa pipeline si avvia automaticamente ogni volta che fai un push su GitHub.
+# Fa due cose:
+#   1. Controlla che il codice Python non abbia errori di sintassi
+#   2. Controlla che il docker-compose.yml sia YAML valido
+
+name: Lint & Validate
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+
+  python-lint:
+    name: Check Python syntax
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download the repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install flake8 (the Python linter)
+        run: pip install flake8
+
+      - name: Run lint on scripts/
+        run: flake8 scripts/ --max-line-length=120
+
+  yaml-validate:
+    name: Validate docker-compose.yml
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download the repo
+        uses: actions/checkout@v4
+
+      - name: Install yamllint
+        run: pip install yamllint
+
+      - name: Validate docker-compose.yml
+        run: yamllint docker-compose.yml
