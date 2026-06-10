@@ -32,7 +32,7 @@ The hypervisor manages multiple isolated nodes, balancing resources between raw 
 
 The network is designed to avoid conflicts with standard ISP subnets and to block trackers at the DNS level.
 
-* Subnetting: Configured a custom 192.168.50.0/24 subnet. This prevents IP collisions when connecting via VPN from external networks (which typically default to 192.168.1.x).
+* Subnetting: Network runs on `192.168.1.0/24`. A migration to `192.168.50.0/24` was evaluated to avoid VPN IP conflicts with external networks, but abandoned due to the number of already-configured devices on the existing subnet.
 * Remote Access (VPN): Deployed WireGuard as a split-tunnel VPN. Remote access is dynamically maintained via a custom Bash script that updates the DDNS record for my personal domain.
 * DNS Sinkhole: AdGuard Home acts as the primary DNS server, blocking ads and telemetry network-wide. IPv6 is explicitly disabled to prevent DNS leakages through secondary routes.
 
