@@ -38,15 +38,15 @@ def tag_file(filepath, artist, title):
             pass
         audio.tags['TIT2'] = TIT2(encoding=3, text=title)
         audio.tags['TPE1'] = TPE1(encoding=3, text=artist)
-        print(f"  [TAG] Searching for cover art...")
+        print("  [TAG] Searching for cover art...")
         cover_data = get_cover_art(artist, title)
         if cover_data:
             audio.tags['APIC'] = APIC(encoding=3, mime='image/jpeg', type=3, desc='Cover', data=cover_data)
-            print(f"  [TAG] Cover art embedded")
+            print("  [TAG] Cover art embedded")
         else:
-            print(f"  [TAG] No cover art found")
+            print("  [TAG] No cover art found")
         audio.save()
-        print(f"  [TAG] ID3 tags successfully written")
+        print("  [TAG] ID3 tags successfully written")
         return True
     except Exception as e:
         print(f"  [WARN] Tagging error: {e}")
