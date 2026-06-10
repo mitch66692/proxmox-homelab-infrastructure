@@ -4,6 +4,17 @@ This repository documents my personal self-hosted infrastructure. It serves as a
 
 All the following instructions are for testing use only and have been created using documentation from official an unofficial sources from blog to youtube guides. 
 
+## Documentation
+
+| Document | Description |
+|---|---|
+| [Network & VPN](./docs/network.md) | Subnet layout, WireGuard, AdGuard DNS |
+| [Proxmox Nodes](./docs/proxmox-nodes.md) | Full node map, VM vs LXC explained |
+| [Docker Stack](./docs/docker-containers.md) | Arr-stack, hardlinks, volume architecture |
+| [Storage & Media](./docs/storage.md) | Disks, UUID mounting, SpotDL pipeline |
+| [Home Automation](./docs/home-automation.md) | Frigate NVR, Home Assistant, problems solved |
+
+
 ## Architecture Overview
 
 The hypervisor manages multiple isolated nodes, balancing resources between raw performance (NVMe storage) and bulk media storage.
